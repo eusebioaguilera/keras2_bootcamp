@@ -1,3 +1,4 @@
+import multiprocessing
 import tensorflow as tf
 import keras
 import pandas as pd
@@ -51,7 +52,7 @@ model.compile(loss="sparse_categorical_crossentropy",
               metrics=["accuracy"])
 
 # Finally, run the training for a number of epochs
-epochs = 50
+epochs = 20
 history = model.fit(X_train, y_train, epochs=epochs,
                     validation_data=(X_valid, y_valid))
 

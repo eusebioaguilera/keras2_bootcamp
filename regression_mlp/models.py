@@ -37,3 +37,27 @@ def get_neural_mlp_model(input_shape, activation_func='relu', neurons=30):
     model = keras.models.Model(inputs=[input], outputs=[output_layer])
 
     return model
+
+
+def get_neural_mlp_model_compiled(input_shape, activation_func='relu', neurons=30):
+    """
+        This method implements a model with a non-sequential topology. For this purpose we need to
+        use the Functional API provided by Keras. 
+        The topology simply concatenate the input to the final hidden layer in order to add information in the final step
+        This function provides a compiled model for hyperparam auto tuning 
+    """
+    input = keras.layers.Input(shape=input_shape)
+    hidden_layer_1 = keras.layers.Dense(
+        units=neurons, activation=activation_func)(input)
+    hidden_layer_2 = keras.layers.Dense(
+        units=neurons, activation=activation_func)(hidden_layer_1)
+    hidden_layer_3 = keras.layers.Dense(
+        units=neurons, activation=activation_func)(hidden_layer_2)
+    concat_layer = keras.layers.Concatenate()([input, hidden_layer_3])
+    output_layer = keras.layers.Dense(1)(concat_layer)
+    # Create the model defining the input layers and the output ones
+    model = keras.models.Model(inputs=[input], outputs=[output_layer])
+
+    model.compile(optimizer='adam', loss='mse')
+
+    return model

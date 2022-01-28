@@ -59,5 +59,5 @@ history = model.fit(X_train, y_train, epochs=epochs,
 # Plot and save learning curves
 pd.DataFrame(history.history).plot(figsize=(8, 5))
 plt.grid(True)
-plt.gca().set_ylim(0, 1) # set the vertical range to [0-1]
-plt.savefig("learaning_history.png")
+plt.gca().set_ylim(0, 1)  # set the vertical range to [0-1]
+plt.savefig("learning_history.png")

@@ -14,7 +14,6 @@ from models import get_neural_mlp_model, get_sequencial_model
 
 # Obtain the dataset
 dataset = fetch_california_housing()
-print(dataset.keys())
 
 # Split the dataset between train/validation/test
 
